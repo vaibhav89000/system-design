@@ -20,8 +20,8 @@ hotel_booking_system.add_room(room1)
 hotel_booking_system.add_room(room2)
 
 
-def attempt_booking(user, room):
-    booking_result = hotel_booking_system.book_room(user, room, date(2024, 2, 20), date(2024, 2, 23))
+def attempt_booking(user, roomId):
+    booking_result = hotel_booking_system.book_room(user, roomId, date(2024, 2, 20), date(2024, 2, 23))
     print(f"{user.name} booking attempt: {booking_result}")
 
 process1 = Process(target=attempt_booking, args=(user1, room1.id))
@@ -45,29 +45,12 @@ process2.join()
 # thread2.start()
 
 
-# # booking room
-# booking = hotel_booking_system.book_room(user1, room1, date(2024, 2, 20), date(2024, 2, 23))
-# booking2 = hotel_booking_system.book_room(user2, room1, date(2024, 2, 20), date(2024, 2, 23))
-# booking3 = hotel_booking_system.book_room(user1, room2, date(2024, 3, 20), date(2024, 3, 23))
 
-# print("first booking got successfull", booking)
-# print("second booking failed at room is not available", booking2)
-
-# print("room1 status ->", room1.status)
+booking3 = hotel_booking_system.book_room(user1, room2.id, date(2024, 3, 20), date(2024, 3, 23))
 
 # # cancel booking
-# print(hotel_booking_system.cancel_booking(booking["booking"].id))
-# print(hotel_booking_system.cancel_booking(booking["booking"].id))
+print(hotel_booking_system.cancel_booking(booking3["booking"].id))
+print(hotel_booking_system.cancel_booking(booking3["booking"].id))
 
-
-# print(hotel_booking_system.get_user_bookings(user1.id))
-
-
-
-
-
-
-
-
-
-
+user1_bookings = hotel_booking_system.get_user_bookings(user1.id)
+print(len(user1_bookings))
