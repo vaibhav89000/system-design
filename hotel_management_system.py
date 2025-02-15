@@ -1,9 +1,14 @@
-from entities import User, Room, Booking, RoomStatus
+from entities import User, Room, Booking, RoomStatus, RoomNotAvailableError
 # from threading import Lock
 import uuid
 from datetime import datetime, date
 import time
 from multiprocessing import Lock, Manager
+
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 class HotelManagementSystem:
     __instance = None
@@ -25,19 +30,22 @@ class HotelManagementSystem:
         self.__instance.rooms[room.id] = room
         
     def book_room(self, user: User, roomId: str, check_in_date: date, check_out_date: date):
-        with self.__instance.lock:
-            room = self.__instance.rooms.get(roomId)
-            if room.status != RoomStatus.AVAILABLE:
-                return "Room is not available"
-            time.sleep(2)
-            if isinstance(room.book(),ValueError):
-                return "Room is not available"
-            else:
-                room.status = RoomStatus.BOOKED
-                self.__instance.rooms[room.id] = room
-                booking = Booking(uuid.uuid4(), user, room, check_in_date, check_out_date)
-                self.__instance.bookings[booking.id] = booking
-                return {"booking": booking, "message": "Room is booked successfully"}
+        try:
+            with self.__instance.lock:
+                room = self.__instance.rooms.get(roomId)
+                if room.status != RoomStatus.AVAILABLE:
+                    raise RoomNotAvailableError(f"Room {roomId} is not available")
+                if isinstance(room.book(),ValueError):
+                    raise RoomNotAvailableError(f"Room {roomId} is not available")
+                else:
+                    room.status = RoomStatus.BOOKED
+                    self.__instance.rooms[room.id] = room
+                    booking = Booking(uuid.uuid4(), user, room, check_in_date, check_out_date)
+                    self.__instance.bookings[booking.id] = booking
+                    logging.info(f"Booking successful for User {user.id} in Room {roomId}")
+                    return {"booking": booking, "message": "Room is booked successfully"}
+        except (RoomNotAvailableError) as e:
+            print(str(e))
             
     def cancel_booking(self, bookingId: str):
         booking = self.__instance.bookings.get(bookingId)
@@ -48,6 +56,7 @@ class HotelManagementSystem:
             self.__instance.bookings[bookingId] = booking_response
             room = booking_response.room
             room.status = RoomStatus.AVAILABLE
+            self.__instance.rooms[room.id] = room
             return "Booking is canceled"
             
     def get_user_bookings(self,userId: str):
@@ -56,13 +65,10 @@ class HotelManagementSystem:
             user_bookings = []
             for bookingId in self.__instance.bookings:
                 booking = self.__instance.bookings[bookingId]
-                if(booking.user == user):
+                if(booking.user.id == user.id):
                     user_bookings.append(booking.__dict__)
             return user_bookings
         else:
             return "There is no user with this id"
         
     
-    
-    
-        
