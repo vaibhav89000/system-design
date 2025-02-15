@@ -1,6 +1,19 @@
 from enum import Enum
 from datetime import date, datetime, timedelta
 
+
+class RoomNotAvailableError(Exception):
+    pass
+
+class BookingNotFoundError(Exception):
+    pass
+
+class UserNotFoundError(Exception):
+    pass
+
+class BookingCancellationError(Exception):
+    pass
+
 class RoomType(Enum):
     BASIC = "BASIC"
     DELUXE = "DELUXE"
@@ -65,7 +78,7 @@ class Room:
             self.status = RoomStatus.BOOKED
             return "Room booked successfully"
         else:
-            return ValueError("This Room is not available") 
+            raise RoomNotAvailableError("This Room is not available") 
         
     def check_in(self):
         if(self.status == RoomStatus.BOOKED):
