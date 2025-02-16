@@ -1,5 +1,6 @@
 # Proxy Design Pattern 🕵️‍♂️
-# The Proxy Pattern is a structural design pattern that acts as a substitute or intermediary for another object. It controls access to the real object, adding security, caching, or lazy initialization.
+# The Proxy Pattern is a structural design pattern that acts as a substitute or intermediary for another object.
+# It controls access to the real object, adding security, caching, or lazy initialization.
 
 # 📌 When to Use the Proxy Pattern?
 # ✅ When direct access to an object is expensive or restricted.
@@ -7,7 +8,8 @@
 # ✅ When you want to add security, logging, caching, or access control before interacting with the real object.
 
 # 🚀 Real-World Example: Internet Access Proxy
-# Imagine a company that restricts internet access for employees. Instead of directly accessing the internet, requests go through a proxy server, which filters allowed and blocked websites.
+# Imagine a company that restricts internet access for employees. Instead of directly accessing the internet,
+# requests go through a proxy server, which filters allowed and blocked websites.
 
 # 🔴 Without Proxy (Direct Access)
 class Internet:
