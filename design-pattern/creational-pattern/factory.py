@@ -1,83 +1,45 @@
-# Factory Design Pattern 🏭
-# The Factory Pattern is a creational design pattern that provides an interface for creating objects in a superclass but allows subclasses to alter the type of objects that will be created.
+# Factory Pattern
+# The Factory Pattern provides a way to create objects of a specific type without exposing the instantiation logic.
 
-# 📌 When to Use the Factory Pattern?
-# ✅ When object creation logic is complex and should be separated from the client code.
-# ✅ When you need to create multiple related objects without specifying their exact class.
-# ✅ When you want to promote loose coupling by not exposing concrete classes to the client.
+# When to Use?
+# When you have a single product family (e.g., different types of Car objects).
+# When you want to delegate object creation to a separate class instead of using new directly.
+# Example (Factory Pattern)
+# Scenario: Creating different types of Car
 
-# 🚀 Real-World Example: Vehicle Factory 🚗
-# Imagine an application that needs to create different types of vehicles (Car, Bike, Truck). Instead of instantiating classes directly, we use a factory to encapsulate object creation.
+from abc import ABC, abstractmethod
 
-# 🔴 Without Factory Pattern (Direct Instantiation)
-class Car:
+# Step 1: Create an interface (abstract class)
+class Car(ABC):
+    @abstractmethod
     def drive(self):
-        return "Driving a Car 🚗"
+        pass
 
-class Bike:
+# Step 2: Create concrete classes
+class Sedan(Car):
     def drive(self):
-        return "Riding a Bike 🏍️"
+        return "Driving a Sedan"
 
-# Client Code
-car = Car()
-print(car.drive())
-
-bike = Bike()
-print(bike.drive())
-
-# 🚨 Problems:
-# The client must know the exact class names (Car, Bike).
-# Hard to add new vehicle types.
-# Tightly coupled to specific implementations.
-
-# ✅ With Factory Pattern (Encapsulated Object Creation)
-# Step 1: Define an Interface (Common Behavior)
-class Vehicle:
+class SUV(Car):
     def drive(self):
-        pass  # To be implemented by subclasses
+        return "Driving an SUV"
 
-# Step 2: Concrete Implementations
-class Car(Vehicle):
-    def drive(self):
-        return "Driving a Car 🚗"
-
-class Bike(Vehicle):
-    def drive(self):
-        return "Riding a Bike 🏍️"
-
-class Truck(Vehicle):
-    def drive(self):
-        return "Driving a Truck 🚛"
-
-# Step 3: Factory Class
-class VehicleFactory:
+# Step 3: Implement Factory
+class CarFactory:
     @staticmethod
-    def get_vehicle(vehicle_type):
-        vehicles = {
-            "car": Car,
-            "bike": Bike,
-            "truck": Truck
-        }
-        return vehicles.get(vehicle_type.lower(), None)()
+    def get_car(car_type):
+        if car_type == "Sedan":
+            return Sedan()
+        elif car_type == "SUV":
+            return SUV()
+        else:
+            raise ValueError("Invalid car type")
 
-# Step 4: Client Code
-vehicle = VehicleFactory.get_vehicle("car")
-print(vehicle.drive())  # Output: Driving a Car 🚗
+# Usage
+car = CarFactory.get_car("SUV")
+print(car.drive())  # Output: Driving an SUV
 
-vehicle = VehicleFactory.get_vehicle("bike")
-print(vehicle.drive())  # Output: Riding a Bike 🏍️
-
-vehicle = VehicleFactory.get_vehicle("truck")
-print(vehicle.drive())  # Output: Driving a Truck 🚛
-
-# 🔑 Key Benefits of the Factory Pattern
-# ✔️ Encapsulation of Object Creation – Clients don't need to know the concrete class names.
-# ✔️ Promotes Loose Coupling – Client depends only on the factory, not specific implementations.
-# ✔️ Easier to Extend – New vehicle types can be added without modifying client code.
-# ✔️ Centralized Object Creation – All logic related to object creation stays in one place.
-
-# 🚀 Real-World Use Cases
-# Database Connections – DatabaseFactory can return MySQL, PostgreSQL, or SQLite connections.
-# Payment Gateways – A factory can create instances for Stripe, PayPal, or Razorpay payments.
-# Notification Services – A factory can create SMS, Email, or Push notification handlers.
-# Logger Factory – A factory can provide different loggers like FileLogger, ConsoleLogger, etc.
+# Key Points
+# ✔️ Factory creates objects but hides object creation logic.
+# ✔️ Decouples object creation from client code.
+# ✔️ Returns one type of object based on input.
