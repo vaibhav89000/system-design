@@ -1,5 +1,6 @@
 # Facade Design Pattern 🏛️
-# The Facade Pattern is a structural design pattern that provides a simplified interface to a complex system. It hides the complexity of subsystems and exposes only the necessary functionality.
+# The Facade Pattern is a structural design pattern that provides a simplified interface to a complex system.
+# It hides the complexity of subsystems and exposes only the necessary functionality.
 
 # 📌 When to Use the Facade Pattern?
 # ✅ When you have a complex system with multiple subsystems, and you want to provide a simple, unified interface.
