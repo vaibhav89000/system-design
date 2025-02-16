@@ -1,5 +1,6 @@
 # Adapter Design Pattern 🔌
-# The Adapter Pattern is a structural design pattern that allows incompatible interfaces to work together. It acts as a bridge between two incompatible classes, enabling them to interact without modifying their code.
+# The Adapter Pattern is a structural design pattern that allows incompatible interfaces to work together.
+# It acts as a bridge between two incompatible classes, enabling them to interact without modifying their code.
 
 # 📌 When to Use the Adapter Pattern?
 # When integrating legacy code with a new system.
