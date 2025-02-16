@@ -1,5 +1,6 @@
 # Composite Design Pattern 🌳
-# The Composite Pattern is a structural design pattern that lets you treat individual objects and groups of objects uniformly. It is useful when you need to build a tree-like structure, such as file systems, UI components, or hierarchical organizations.
+# The Composite Pattern is a structural design pattern that lets you treat individual objects and groups of objects uniformly.
+# It is useful when you need to build a tree-like structure, such as file systems, UI components, or hierarchical organizations.
 
 # 📌 When to Use the Composite Pattern?
 # When you need to treat single objects and collections (composites) the same way.
