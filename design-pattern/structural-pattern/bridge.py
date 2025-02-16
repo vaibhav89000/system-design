@@ -2,6 +2,7 @@
 # The Bridge Pattern is a structural design pattern that helps decouple abstraction from implementation,
 # allowing them to evolve independently. It is useful when you want to avoid rigid class hierarchies and
 # prefer composition over inheritance.
+# It also solves m*n problem by providing solution with m+n
 
 # 📌 When to Use the Bridge Pattern?
 # When you have multiple dimensions of variability (e.g., a hierarchy of Shapes and another hierarchy of Rendering APIs).
