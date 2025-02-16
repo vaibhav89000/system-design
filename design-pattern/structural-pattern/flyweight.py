@@ -9,7 +9,8 @@
 # ✅ When memory usage is a concern, and object reuse can optimize performance.
 
 # 🚀 Real-World Example: Text Editor with Character Objects
-# Imagine a text editor that displays millions of characters. Instead of creating a new object for each character, we reuse character objects to save memory.
+# Imagine a text editor that displays millions of characters. Instead of creating a new object for each character,
+# we reuse character objects to save memory.
 
 # 🔴 Without Flyweight (High Memory Usage)
 class Character:
