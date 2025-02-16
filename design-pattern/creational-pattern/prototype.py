@@ -1,12 +1,14 @@
 # Prototype Design Pattern 🏗️
-# The Prototype Pattern is a creational design pattern that allows cloning objects instead of creating them from scratch. It is useful when object creation is costly, complex, or time-consuming.
+# The Prototype Pattern is a creational design pattern that allows cloning objects instead of creating them from scratch.
+# It is useful when object creation is costly, complex, or time-consuming.
 
 # 📌 When to Use the Prototype Pattern?
 # When object creation is expensive (e.g., deep object initialization, database calls).
 # When you need to create multiple objects with similar properties.
 # When you want to avoid the complexity of building an object from scratch.
 # 🛠 Example: Hotel Room Booking System
-# Imagine we are developing a hotel booking system, where we frequently create new hotel rooms with slight modifications. Instead of initializing them from scratch, we can clone existing room templates.
+# Imagine we are developing a hotel booking system, where we frequently create new hotel rooms with slight modifications.
+# Instead of initializing them from scratch, we can clone existing room templates.
 
 # 🚀 Without Prototype Pattern (Traditional Object Creation)
 
